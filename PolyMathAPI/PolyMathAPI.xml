@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PolyMathAPI</name>
+    </assembly>
+    <members>
+        <member name="M:PolyMathAPI.Controllers.ArticlesController.GetArticles">
+            <summary>
+            Get All Articles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PolyMathAPI.Controllers.ArticlesController.GetArticle(System.Int32)">
+            <summary>
+            Get Single Article
+            </summary>
+            <param name="articleId">The article id</param>
+            <returns></returns>
+        </member>
+        <member name="M:PolyMathAPI.Controllers.ArticlesController.GetArticleInGenre(System.Int32)">
+            <summary>
+            Get All Articles in A Specific Genre
+            </summary>
+            <param name="genreId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PolyMathAPI.Controllers.GenresController.GetGenres">
+            <summary>
+            Get List Of All Genres
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PolyMathAPI.Controllers.GenresController.GetGenre(System.Int32)">
+            <summary>
+            Get a single Genre
+            </summary>
+            <param name="genreId">The Id of the Genre </param>
+            <returns></returns>
+        </member>
+        <member name="M:PolyMathAPI.Controllers.GenresV2Controller.GetGenres">
+            <summary>
+            Get List Of All Genres
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
