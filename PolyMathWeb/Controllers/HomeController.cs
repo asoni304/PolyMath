@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PolyMathWeb.Models;
+using PolyMathWeb.Models.ViewModel;
+using PolyMathWeb.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,15 +14,30 @@ namespace PolyMathWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IGenreRepository _genreRepo;
+        private readonly IArticleRepository _articleRepo;
 
-        public HomeController(ILogger<HomeController> logger)
+
+
+
+
+        public HomeController(ILogger<HomeController> logger, IArticleRepository articleRepo,IGenreRepository genreRepository)
         {
             _logger = logger;
+            _articleRepo = articleRepo;
+            _genreRepo = genreRepository;
+
+
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexVM ListOfGenresAndArticles = new IndexVM()
+            {
+                GenreList = await _genreRepo.GetAllAsync(SD.GenreAPIPath),
+                ArticleList = await _articleRepo.GetAllAsync(SD.ArticleAPIPath)
+            };
+            return View(ListOfGenresAndArticles);
         }
 
         public IActionResult Privacy()

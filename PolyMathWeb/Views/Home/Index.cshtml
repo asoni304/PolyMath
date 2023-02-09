@@ -1,8 +1,81 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model PolyMathWeb.Models.ViewModel.IndexVM
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to PolyMath Web</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container" >
+	<div class="row pb-4 backgroundWhite">
+		@if (Model != null && Model.GenreList != null)
+		{
+			@foreach (var genre in Model.GenreList)
+			{
+						<div class="container backgroundWhite pb-4">
+							<div class="card border">
+								<div class="card-header bg-dark text-light ml-0 row container">
+									<div class="col-12 col-md-6">
+										<h1 class="text-warning">@genre.Name</h1>
+									</div>
+									<div class="col-12 col-md-6 text-md-right">
+										<h1 class="text-warning">Description : @genre.Description</h1>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="container rounded p-2">
+										<div class="row">
+											<div class="col-12 col-lg-8">
+												<div class="row">
+													<div class="col-12">
+														<h3 style="color:#bbb9b9">Established: @genre.Created.Year </h3>
+													</div>
+													<div class="col-12">
+												@if (Model.ArticleList.Where(u => u.GenreId == genre.Id).Count() > 0)
+												{
+
+
+																<table class="table table-striped" style="border:1px solid #808080 ">
+																	<tr class="table-secondary">
+																		<th>
+																			Genre
+																		</th>
+																		<th>Title</th>
+																		<th>Content</th>
+																		<th>Author</th>
+																	</tr>
+														@foreach (var article in Model.ArticleList.Where(u => u.GenreId == genre.Id))
+														{
+
+
+																			<tr>
+																				<td>@article.Genre</td>
+																				<td>@article.Title</td>
+																				<td>@article.Content </td>
+																				<td>@article.Author</td>
+																				
+																			</tr>
+														}
+																</table>
+												}
+												else
+												{
+																<p>No articles exist</p>
+												}
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-lg-4 text-center">
+										@{
+											var base64 = Convert.ToBase64String(genre.Picture);
+											var finalStr = string.Format("data:image/jpg;base64,{0}", base64);
+
+										}
+												<img src="@finalStr" width="100%" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+			}
+		}
+
+	</div>
 </div>
+
+
